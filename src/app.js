@@ -18,16 +18,18 @@ const connectDb = async () => {
   }
 }
 
+//middleware
 const app = express();
 app.use(bodyParser.json());
 
+//schemas y resolvers
 const typeDefs = require('./merge/mergeSchema')
 const resolvers = require('./merge/mergeResolver')
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 5020
 
 async function start(){
-  const schema =  makeExecutableSchema({typeDefs, resolvers})
+  const schema = makeExecutableSchema({typeDefs, resolvers})
   const apolloServer = new ApolloServer({
     schema,
     plugins: [
