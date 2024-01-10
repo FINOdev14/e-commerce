@@ -28,7 +28,7 @@ const resolvers = require('./merge/mergeResolver')
 
 const PORT = process.env.PORT || 5020
 
-//configuración del servidor de apollo y la conexion con el servidor de express
+//configuración del servidor de apollo y la conexion con el servidor de express.
 async function start(){
   const schema = makeExecutableSchema({ typeDefs, resolvers })
   const apolloServer = new ApolloServer({
