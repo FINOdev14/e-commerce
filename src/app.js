@@ -18,16 +18,19 @@ const connectDb = async () => {
   }
 }
 
+//middleware
 const app = express();
 app.use(bodyParser.json());
 
+//schemas y resolvers
 const typeDefs = require('./merge/mergeSchema')
 const resolvers = require('./merge/mergeResolver')
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 5020
 
+//configuración del servidor de apollo y la conexion con el servidor de express
 async function start(){
-  const schema =  makeExecutableSchema({typeDefs, resolvers})
+  const schema = makeExecutableSchema({ typeDefs, resolvers })
   const apolloServer = new ApolloServer({
     schema,
     plugins: [
@@ -36,8 +39,8 @@ async function start(){
       })
     ]
   })
-  await apolloServer.start()
-  apolloServer.applyMiddleware({app})
+  await apolloServer.start();
+  apolloServer.applyMiddleware({ app });
 
   app.listen(PORT, () => {
     console.log(`e-commerce ready at port: http://localhost:${PORT}/graphql`);
@@ -45,6 +48,7 @@ async function start(){
   })
 }
 
+//iniciando servidor
 start()
 
 
